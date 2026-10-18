@@ -1,48 +1,260 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <!-- Primary SEO Meta Tags -->
+  <title>Calculator Abuser | The Sarcastic Calculator That Roasts Your Easy Math</title>
+  <meta name="title" content="Calculator Abuser | The Sarcastic Calculator That Roasts Your Easy Math" />
+  <meta name="description" content="Use Calculator Abuser, the free online sarcastic pocket calculator that insults and roasts you whenever you calculate easy math like 2+2, multiplying by 1, or adding 0." />
+  <meta name="keywords" content="calculator abuser, insulting calculator, calculator that roasts you, sarcastic calculator, funny calculator online, mean calculator, sassy math calculator, judgmental calculator" />
+  <meta name="author" content="Calculator Abuser" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <link rel="canonical" href="https://calculatorabuser.netlify.app/" />
+
+  <!-- Open Graph / Facebook / Discord / WhatsApp -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://calculatorabuser.netlify.app/" />
+  <meta property="og:title" content="Calculator Abuser | The Sarcastic Calculator That Roasts Your Easy Math" />
+  <meta property="og:description" content="Use Calculator Abuser, the free online sarcastic pocket calculator that insults and roasts you whenever you calculate easy math like 2+2, multiplying by 1, or adding 0." />
+  <meta property="og:site_name" content="Calculator Abuser" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter / X Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://calculatorabuser.netlify.app/" />
+  <meta name="twitter:title" content="Calculator Abuser | The Sarcastic Calculator That Roasts Your Easy Math" />
+  <meta name="twitter:description" content="Use Calculator Abuser, the free online sarcastic pocket calculator that insults and roasts you whenever you calculate easy math like 2+2, multiplying by 1, or adding 0." />
+
+  <!-- Mobile PWA & Browser Theme Integration -->
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="application-name" content="Calculator Abuser" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Calculator Abuser" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- Zero-404 Inline SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23181a1e'/%3E%3Crect x='10' y='10' width='44' height='16' rx='4' fill='%23111417' stroke='%23f59e0b' stroke-width='2'/%3E%3Ccircle cx='18' cy='36' r='4' fill='%23404040'/%3E%3Ccircle cx='32' cy='36' r='4' fill='%23404040'/%3E%3Ccircle cx='46' cy='36' r='4' fill='%23f59e0b'/%3E%3Ccircle cx='18' cy='48' r='4' fill='%23404040'/%3E%3Ccircle cx='32' cy='48' r='4' fill='%23404040'/%3E%3Ccircle cx='46' cy='48' r='4' fill='%23f59e0b'/%3E%3C/svg%3E" />
+
+  <!-- JSON-LD Structured Data for Google Rich Results (WebApplication + WebSite) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://calculatorabuser.netlify.app/#website",
+        "url": "https://calculatorabuser.netlify.app/",
+        "name": "Calculator Abuser",
+        "alternateName": "The Sarcastic Calculator That Roasts Your Easy Math",
+        "description": "Free online sarcastic pocket calculator that insults and roasts you whenever you calculate easy math.",
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://calculatorabuser.netlify.app/#webapp",
+        "name": "Calculator Abuser",
+        "url": "https://calculatorabuser.netlify.app/",
+        "description": "Use Calculator Abuser, the free online sarcastic pocket calculator that insults and roasts you whenever you calculate easy math like 2+2, multiplying by 1, or adding 0.",
+        "applicationCategory": "UtilitiesApplication",
+        "applicationSubCategory": "Calculator",
+        "genre": "Comedy Calculator",
+        "operatingSystem": "All",
+        "browserRequirements": "Requires JavaScript. Works on all modern mobile, tablet, and desktop browsers.",
+        "isAccessibleForFree": true,
+        "inLanguage": "en-US",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        "featureList": [
+          "Standard arithmetic calculations (addition, subtraction, multiplication, division, percentages, sign toggle)",
+          "Context-aware sarcastic roasts for trivial calculations like 2+2, adding 0, or multiplying by 1",
+          "Begrudging respect for complex multi-step or multi-digit calculations",
+          "Full keyboard and mobile touchscreen support with auto-resolution scaling"
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
+    /* System-first zero-CLS font stacks for instant Largest Contentful Paint (LCP) */
+    :root {
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background-color: #0a0a0a;
+      color: #f5f5f5;
+      font-family: var(--font-sans);
       user-select: none;
+      -webkit-user-select: none;
+      overflow-x: hidden;
     }
+
+    /* Full dynamic viewport sizing with safe-area support for notched mobile screens */
+    .viewport-wrapper {
+      min-height: 100vh;
+      min-height: 100dvh;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding:
+        max(12px, env(safe-area-inset-top))
+        max(12px, env(safe-area-inset-right))
+        max(12px, env(safe-area-inset-bottom))
+        max(12px, env(safe-area-inset-left));
+    }
+
     .font-mono-calc {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
     }
 
-    /* Realistic pocket calculator body & tactile buttons */
+    /* Screen-reader & SEO crawler assistive visibility without visual clutter */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    /* Auto-resolution scaling pocket calculator chassis */
     .calc-chassis {
+      width: min(100%, 370px);
+      padding: clamp(14px, 3.8vmin, 24px);
+      border-radius: clamp(22px, 5vmin, 32px);
       background: linear-gradient(145deg, #22252a, #181a1e);
+      border: 1px solid rgba(64, 64, 64, 0.45);
       box-shadow:
-        0 30px 60px -12px rgba(0, 0, 0, 0.75),
-        0 18px 36px -18px rgba(0, 0, 0, 0.8),
+        0 30px 60px -12px rgba(0, 0, 0, 0.78),
+        0 18px 36px -18px rgba(0, 0, 0, 0.85),
         inset 0 1px 1px rgba(255, 255, 255, 0.12),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.6);
+        inset 0 -2px 4px rgba(0, 0, 0, 0.65);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(10px, 2.2vmin, 18px);
     }
 
+    /* Subtle hardware bezel header housing the semantic H1 */
+    .calc-bezel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+
+    .calc-brand-title {
+      font-size: clamp(0.62rem, 1.5vmin, 0.72rem);
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #737373;
+      margin: 0;
+      line-height: 1;
+    }
+
+    .calc-bezel-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .calc-model-tag {
+      font-family: var(--font-mono);
+      font-size: clamp(0.58rem, 1.3vmin, 0.65rem);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: #525252;
+    }
+
+    /* Tiny authentic solar cell detail */
+    .solar-strip {
+      width: 36px;
+      height: 10px;
+      border-radius: 3px;
+      background: repeating-linear-gradient(
+        90deg,
+        #1c1917 0px,
+        #1c1917 8px,
+        #292524 8px,
+        #292524 9px
+      );
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.9);
+    }
+
+    /* Built-in recessed LCD screen */
     .calc-screen {
       background: linear-gradient(180deg, #111417 0%, #161a1e 100%);
+      border-radius: clamp(14px, 3vmin, 18px);
+      padding: clamp(12px, 2.8vmin, 16px);
+      min-height: clamp(132px, 24vmin, 176px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid rgba(38, 38, 38, 0.95);
       box-shadow:
         inset 0 3px 8px rgba(0, 0, 0, 0.85),
         inset 0 1px 2px rgba(0, 0, 0, 0.9),
         0 1px 0 rgba(255, 255, 255, 0.07);
+      overflow: hidden;
+      position: relative;
     }
 
+    /* Keypad Grid */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(8px, 2vmin, 12px);
+    }
+
+    /* Tactile Zero-Delay Hardware Buttons */
     .key-btn {
+      height: clamp(46px, 8.2vmin, 58px);
+      border-radius: clamp(12px, 2.6vmin, 16px);
+      border: none;
+      cursor: pointer;
+      touch-action: manipulation;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       transition: transform 0.06s ease, box-shadow 0.06s ease, background-color 0.12s ease;
       box-shadow:
         0 4px 0 #0e1013,
         0 5px 8px rgba(0, 0, 0, 0.45),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .key-btn:focus-visible {
+      outline: 2px solid #f59e0b;
+      outline-offset: 2px;
     }
 
     .key-btn:active,
@@ -52,6 +264,36 @@
         0 1px 0 #0e1013,
         0 2px 3px rgba(0, 0, 0, 0.4),
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    /* Compact Landscape Adaptation for Mobile Phones Turned Sideways */
+    @media (max-height: 540px) and (orientation: landscape) {
+      .calc-chassis {
+        width: min(100%, 520px);
+        flex-direction: row;
+        align-items: stretch;
+        padding: 12px;
+        gap: 14px;
+      }
+      .calc-left-panel {
+        flex: 1 1 44%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-width: 0;
+      }
+      .calc-screen {
+        flex: 1;
+        min-height: 0;
+        margin-top: 6px;
+      }
+      .calc-grid {
+        flex: 1 1 56%;
+        gap: 7px;
+      }
+      .key-btn {
+        height: clamp(36px, 11vh, 46px);
+      }
     }
 
     @keyframes screenShake {
@@ -67,99 +309,115 @@
     }
   </style>
 </head>
-<body class="bg-neutral-950 min-h-screen w-full flex items-center justify-center p-4">
+<body class="bg-neutral-950 text-neutral-100">
 
-  <!-- Minimalist Pocket Calculator -->
-  <main id="calculator" class="calc-chassis w-full max-w-[350px] rounded-[32px] p-6 border border-neutral-800/80">
-    
-    <!-- Built-in Display Screen -->
-    <div id="screen" class="calc-screen rounded-2xl p-4 mb-6 h-44 flex flex-col justify-between border border-neutral-800/90 overflow-hidden relative">
-      
-      <!-- Top Row: Expression Trail -->
-      <div id="expressionDisplay" class="font-mono-calc text-xs text-neutral-500 text-right truncate h-4">
+  <main class="viewport-wrapper">
+    <!-- Minimalist Pocket Calculator Chassis -->
+    <section id="calculator" aria-label="Sarcastic Pocket Calculator" class="calc-chassis">
+
+      <!-- Assistive SEO & Screen Reader Summary (Visually Hidden, Zero Clutter) -->
+      <p class="sr-only">
+        Calculator Abuser is a free online sarcastic pocket calculator that performs standard arithmetic while roasting and insulting you inside its screen whenever you enter easy math problems like 2+2, adding zero, or multiplying by one.
+      </p>
+
+      <div class="calc-left-panel flex flex-col gap-2.5">
+        <!-- Hardware Bezel Stamp with Authentic Visible H1 for Search Crawlers -->
+        <header class="calc-bezel">
+          <h1 class="calc-brand-title">CALCULATOR ABUSER</h1>
+          <div class="calc-bezel-right" aria-hidden="true">
+            <span class="calc-model-tag">CA-9000</span>
+            <div class="solar-strip"></div>
+          </div>
+        </header>
+
+        <!-- Built-in Display Screen -->
+        <div id="screen" role="region" aria-label="Calculator Screen" class="calc-screen">
+          <!-- Top Row: Expression Trail -->
+          <div id="expressionDisplay" aria-live="off" class="font-mono-calc text-xs text-neutral-500 text-right truncate h-4">
+          </div>
+
+          <!-- Middle Area: In-Screen Insult / Feedback Readout -->
+          <output id="insultDisplay" aria-live="polite" aria-atomic="true" class="block text-xs leading-snug font-medium text-right my-auto py-1 transition-opacity duration-200 opacity-0">
+          </output>
+
+          <!-- Bottom Row: Main Numeric Input / Result -->
+          <output id="mainDisplay" aria-live="polite" aria-atomic="true" class="block font-mono-calc text-3xl sm:text-4xl font-semibold text-neutral-100 text-right tracking-tight truncate">
+            0
+          </output>
+        </div>
       </div>
 
-      <!-- Middle Area: In-Screen Insult / Feedback Readout -->
-      <div id="insultDisplay" class="text-xs leading-snug font-medium text-right my-auto py-1 transition-opacity duration-200 opacity-0">
+      <!-- Standard 4-Column Keypad -->
+      <div class="calc-grid" role="group" aria-label="Calculator Keypad">
+        <!-- Row 1: C, ± (Toggle Sign), %, ÷ -->
+        <button type="button" data-key="Escape" aria-label="Clear All" onclick="clearAll()" class="key-btn bg-neutral-700/80 hover:bg-neutral-700 text-rose-400 font-semibold text-lg">
+          C
+        </button>
+        <button type="button" data-key="Backspace" aria-label="Toggle Sign or Backspace" onclick="toggleSign()" class="key-btn bg-neutral-700/80 hover:bg-neutral-700 text-neutral-200 font-medium text-lg">
+          ±
+        </button>
+        <button type="button" data-key="%" aria-label="Percentage" onclick="inputPercent()" class="key-btn bg-neutral-700/80 hover:bg-neutral-700 text-neutral-200 font-medium text-lg">
+          %
+        </button>
+        <button type="button" data-key="/" aria-label="Divide" onclick="inputOperator('/')" class="key-btn bg-amber-600/90 hover:bg-amber-500 text-white font-semibold text-2xl">
+          ÷
+        </button>
+
+        <!-- Row 2: 7, 8, 9, × -->
+        <button type="button" data-key="7" aria-label="7" onclick="inputDigit('7')" class="key-btn bg-neutral-800 hover:bg-neutral-700 text-neutral-100 font-mono-calc font-medium text-xl">
+          7
+        </button>
+        <button type="button" data-key="8" aria-label="8" onclick="inputDigit('8')" class="key-btn bg-neutral-800 hover:bg-neutral-700 text-neutral-100 font-mono-calc font-medium text-xl">
+          8
+        </button>
+        <button type="button" data-key="9" aria-label="9" onclick="inputDigit('9')" class="key-btn bg-neutral-800 hover:bg-neutral-700 text-neutral-100 font-mono-calc font-medium text-xl">
+          9
+        </button>
+        <button type="button" data-key="*" aria-label="Multiply" onclick="inputOperator('*')" class="key-btn bg-amber-600/90 hover:bg-amber-500 text-white font-semibold text-2xl">
+          ×
+        </button>
+
+        <!-- Row 3: 4, 5, 6, − -->
+        <button type="button" data-key="4" aria-label="4" onclick="inputDigit('4')" class="key-btn bg-neutral-800 hover:bg-neutral-700 text-neutral-100 font-mono-calc font-medium text-xl">
+          4
+        </button>
+        <button type="button" data-key="5" aria-label="5" onclick="inputDigit('5')" class="key-btn bg-neutral-800 hover:bg-neutral-700 text-neutral-100 font-mono-calc font-medium text-xl">
+          5
+        </button>
+        <button type="button" data-key="6" aria-label="6" onclick="inputDigit('6')" class="key-btn bg-neutral-800 hover:bg-neutral-700 text-neutral-100 font-mono-calc font-medium text-xl">
+          6
+        </button>
+        <button type="button" data-key="-" aria-label="Subtract" onclick="inputOperator('-')" class="key-btn bg-amber-600/90 hover:bg-amber-500 text-white font-semibold text-2xl">
+          −
+        </button>
+
+        <!-- Row 4: 1, 2, 3, + -->
+        <button type="button" data-key="1" aria-label="1" onclick="inputDigit('1')" class="key-btn bg-neutral-800 hover:bg-neutral-700 text-neutral-100 font-mono-calc font-medium text-xl">
+          1
+        </button>
+        <button type="button" data-key="2" aria-label="2" onclick="inputDigit('2')" class="key-btn bg-neutral-800 hover:bg-neutral-700 text-neutral-100 font-mono-calc font-medium text-xl">
+          2
+        </button>
+        <button type="button" data-key="3" aria-label="3" onclick="inputDigit('3')" class="key-btn bg-neutral-800 hover:bg-neutral-700 text-neutral-100 font-mono-calc font-medium text-xl">
+          3
+        </button>
+        <button type="button" data-key="+" aria-label="Add" onclick="inputOperator('+')" class="key-btn bg-amber-600/90 hover:bg-amber-500 text-white font-semibold text-2xl">
+          +
+        </button>
+
+        <!-- Row 5: 0 (spans 2 columns), ., = -->
+        <button type="button" data-key="0" aria-label="0" onclick="inputDigit('0')" class="key-btn col-span-2 bg-neutral-800 hover:bg-neutral-700 text-neutral-100 font-mono-calc font-medium text-xl justify-start pl-7">
+          0
+        </button>
+        <button type="button" data-key="." aria-label="Decimal Point" onclick="inputDecimal()" class="key-btn bg-neutral-800 hover:bg-neutral-700 text-neutral-100 font-mono-calc font-bold text-xl">
+          .
+        </button>
+        <button type="button" data-key="Enter" aria-label="Equals" onclick="calculate()" class="key-btn bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold text-2xl">
+          =
+        </button>
       </div>
 
-      <!-- Bottom Row: Main Numeric Input / Result -->
-      <div id="mainDisplay" class="font-mono-calc text-3xl sm:text-4xl font-semibold text-neutral-100 text-right tracking-tight truncate">
-        0
-      </div>
-
-    </div>
-
-    <!-- Standard 4-Column Keypad -->
-    <div class="grid grid-cols-4 gap-3">
-      <!-- Row 1: C, ⌫, %, ÷ -->
-      <button type="button" data-key="Escape" onclick="clearAll()" class="key-btn h-14 rounded-2xl bg-neutral-700/80 hover:bg-neutral-700 text-rose-400 font-semibold text-lg">
-        C
-      </button>
-      <button type="button" data-key="Backspace" onclick="backspace()" class="key-btn h-14 rounded-2xl bg-neutral-700/80 hover:bg-neutral-700 text-neutral-200 font-medium text-lg">
-        ⌫
-      </button>
-      <button type="button" data-key="%" onclick="inputPercent()" class="key-btn h-14 rounded-2xl bg-neutral-700/80 hover:bg-neutral-700 text-neutral-200 font-medium text-lg">
-        %
-      </button>
-      <button type="button" data-key="/" onclick="inputOperator('/')" class="key-btn h-14 rounded-2xl bg-amber-600/90 hover:bg-amber-500 text-white font-semibold text-2xl">
-        ÷
-      </button>
-
-      <!-- Row 2: 7, 8, 9, × -->
-      <button type="button" data-key="7" onclick="inputDigit('7')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
-        7
-      </button>
-      <button type="button" data-key="8" onclick="inputDigit('8')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
-        8
-      </button>
-      <button type="button" data-key="9" onclick="inputDigit('9')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
-        9
-      </button>
-      <button type="button" data-key="*" onclick="inputOperator('*')" class="key-btn h-14 rounded-2xl bg-amber-600/90 hover:bg-amber-500 text-white font-semibold text-2xl">
-        ×
-      </button>
-
-      <!-- Row 3: 4, 5, 6, − -->
-      <button type="button" data-key="4" onclick="inputDigit('4')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
-        4
-      </button>
-      <button type="button" data-key="5" onclick="inputDigit('5')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
-        5
-      </button>
-      <button type="button" data-key="6" onclick="inputDigit('6')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
-        6
-      </button>
-      <button type="button" data-key="-" onclick="inputOperator('-')" class="key-btn h-14 rounded-2xl bg-amber-600/90 hover:bg-amber-500 text-white font-semibold text-2xl">
-        −
-      </button>
-
-      <!-- Row 4: 1, 2, 3, + -->
-      <button type="button" data-key="1" onclick="inputDigit('1')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
-        1
-      </button>
-      <button type="button" data-key="2" onclick="inputDigit('2')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
-        2
-      </button>
-      <button type="button" data-key="3" onclick="inputDigit('3')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
-        3
-      </button>
-      <button type="button" data-key="+" onclick="inputOperator('+')" class="key-btn h-14 rounded-2xl bg-amber-600/90 hover:bg-amber-500 text-white font-semibold text-2xl">
-        +
-      </button>
-
-      <!-- Row 5: 0 (spans 2 columns), ., = -->
-      <button type="button" data-key="0" onclick="inputDigit('0')" class="key-btn col-span-2 h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl text-left pl-7">
-        0
-      </button>
-      <button type="button" data-key="." onclick="inputDecimal()" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-bold text-xl">
-        .
-      </button>
-      <button type="button" data-key="Enter" onclick="calculate()" class="key-btn h-14 rounded-2xl bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold text-2xl">
-        =
-      </button>
-    </div>
-
+    </section>
   </main>
 
   <script>
@@ -250,22 +508,36 @@
     function showInsult(text, type = 'roast') {
       insultDisplay.textContent = text;
       if (type === 'roast') {
-        insultDisplay.className = 'text-xs leading-snug font-medium text-right my-auto py-1 transition-opacity duration-200 opacity-100 text-amber-400';
+        insultDisplay.className = 'block text-xs leading-snug font-medium text-right my-auto py-1 transition-opacity duration-200 opacity-100 text-amber-400';
         calculatorEl.classList.remove('shake');
         void calculatorEl.offsetWidth;
         calculatorEl.classList.add('shake');
       } else if (type === 'error') {
-        insultDisplay.className = 'text-xs leading-snug font-medium text-right my-auto py-1 transition-opacity duration-200 opacity-100 text-rose-400';
+        insultDisplay.className = 'block text-xs leading-snug font-medium text-right my-auto py-1 transition-opacity duration-200 opacity-100 text-rose-400';
         calculatorEl.classList.remove('shake');
         void calculatorEl.offsetWidth;
         calculatorEl.classList.add('shake');
       } else if (type === 'respect') {
-        insultDisplay.className = 'text-xs leading-snug font-medium text-right my-auto py-1 transition-opacity duration-200 opacity-100 text-emerald-400';
+        insultDisplay.className = 'block text-xs leading-snug font-medium text-right my-auto py-1 transition-opacity duration-200 opacity-100 text-emerald-400';
+      }
+    }
+
+    // Dynamically scale display font size so long equations fit on any resolution
+    function syncDisplayFontSize(text) {
+      const len = text.length;
+      if (len > 16) {
+        mainDisplay.className = 'block font-mono-calc text-xl sm:text-2xl font-semibold text-neutral-100 text-right tracking-tight truncate';
+      } else if (len > 11) {
+        mainDisplay.className = 'block font-mono-calc text-2xl sm:text-3xl font-semibold text-neutral-100 text-right tracking-tight truncate';
+      } else {
+        mainDisplay.className = 'block font-mono-calc text-3xl sm:text-4xl font-semibold text-neutral-100 text-right tracking-tight truncate';
       }
     }
 
     function updateDisplay() {
-      mainDisplay.textContent = formatPretty(expression || '0');
+      const pretty = formatPretty(expression || '0');
+      syncDisplayFontSize(pretty);
+      mainDisplay.textContent = pretty;
     }
 
     function clearAll() {
@@ -284,6 +556,24 @@
       clearInsult();
       expression = expression.slice(0, -1);
       updateDisplay();
+    }
+
+    function toggleSign() {
+      if (!expression || expression === '0') return;
+      clearInsult();
+
+      // If it's a single number, invert its sign directly
+      if (/^[+-]?\d+(\.\d+)?$/.test(expression)) {
+        expression = expression.startsWith('-')
+          ? expression.slice(1)
+          : '-' + expression.replace(/^\+/, '');
+        justEvaluated = false;
+        updateDisplay();
+        return;
+      }
+
+      // Otherwise act as a smart backspace for convenience
+      backspace();
     }
 
     function inputDigit(digit) {
@@ -461,11 +751,14 @@
         expressionDisplay.textContent = `${formatPretty(cleanExpr)} =`;
 
         if (!Number.isFinite(result)) {
+          syncDisplayFontSize('Error');
           mainDisplay.textContent = 'Error';
           expression = '';
         } else {
           expression = String(result);
-          mainDisplay.textContent = formatPretty(expression);
+          const prettyResult = formatPretty(expression);
+          syncDisplayFontSize(prettyResult);
+          mainDisplay.textContent = prettyResult;
         }
 
         justEvaluated = true;
@@ -476,6 +769,7 @@
           clearInsult();
         }
       } catch {
+        syncDisplayFontSize('Error');
         mainDisplay.textContent = 'Error';
         expression = '';
         justEvaluated = true;
