@@ -4,6 +4,14 @@ A minimalist pocket calculator that judges your math. Trivial calculations get a
 
 Built with plain HTML, CSS, and JavaScript—no frameworks, bundlers, or build step required.
 
+## Live Demo
+
+Try the deployed calculator on Netlify:
+
+**[Open MyCalculator](https://calculatorabuser.netlify.app)**
+
+The live site is deployed from the project and can be used directly in any modern web browser.
+
 ## Features
 
 - Basic arithmetic: addition, subtraction, multiplication, and division
@@ -49,6 +57,14 @@ python3 -m http.server
 ```
 
 Then open `http://localhost:8000` in your browser.
+
+## Deployment
+
+This is a static web project and is deployed using Netlify. The production site is available at:
+
+https://calculatorabuser.netlify.app
+
+To deploy your own copy, connect the repository to Netlify and use the project root as the publish directory. No build command is required.
 
 ## Controls
 
