@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .font-mono-calc {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Realistic pocket calculator body & tactile buttons */
+    .calc-chassis {
+      background: linear-gradient(145deg, #22252a, #181a1e);
+      box-shadow:
+        0 30px 60px -12px rgba(0, 0, 0, 0.75),
+        0 18px 36px -18px rgba(0, 0, 0, 0.8),
+        inset 0 1px 1px rgba(255, 255, 255, 0.12),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .calc-screen {
+      background: linear-gradient(180deg, #111417 0%, #161a1e 100%);
+      box-shadow:
+        inset 0 3px 8px rgba(0, 0, 0, 0.85),
+        inset 0 1px 2px rgba(0, 0, 0, 0.9),
+        0 1px 0 rgba(255, 255, 255, 0.07);
+    }
+
+    .key-btn {
+      transition: transform 0.06s ease, box-shadow 0.06s ease, background-color 0.12s ease;
+      box-shadow:
+        0 4px 0 #0e1013,
+        0 5px 8px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .key-btn:active,
+    .key-btn.pressed {
+      transform: translateY(3px);
+      box-shadow:
+        0 1px 0 #0e1013,
+        0 2px 3px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    }
+
+    @keyframes screenShake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-4px); }
+      40% { transform: translateX(4px); }
+      60% { transform: translateX(-3px); }
+      80% { transform: translateX(3px); }
+    }
+
+    .shake {
+      animation: screenShake 0.32s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-neutral-950 min-h-screen w-full flex items-center justify-center p-4">
+
+  <!-- Minimalist Pocket Calculator -->
+  <main id="calculator" class="calc-chassis w-full max-w-[350px] rounded-[32px] p-6 border border-neutral-800/80">
+    
+    <!-- Built-in Display Screen -->
+    <div id="screen" class="calc-screen rounded-2xl p-4 mb-6 h-44 flex flex-col justify-between border border-neutral-800/90 overflow-hidden relative">
+      
+      <!-- Top Row: Expression Trail -->
+      <div id="expressionDisplay" class="font-mono-calc text-xs text-neutral-500 text-right truncate h-4">
+      </div>
+
+      <!-- Middle Area: In-Screen Insult / Feedback Readout -->
+      <div id="insultDisplay" class="text-xs leading-snug font-medium text-right my-auto py-1 transition-opacity duration-200 opacity-0">
+      </div>
+
+      <!-- Bottom Row: Main Numeric Input / Result -->
+      <div id="mainDisplay" class="font-mono-calc text-3xl sm:text-4xl font-semibold text-neutral-100 text-right tracking-tight truncate">
+        0
+      </div>
+
+    </div>
+
+    <!-- Standard 4-Column Keypad -->
+    <div class="grid grid-cols-4 gap-3">
+      <!-- Row 1: C, ⌫, %, ÷ -->
+      <button type="button" data-key="Escape" onclick="clearAll()" class="key-btn h-14 rounded-2xl bg-neutral-700/80 hover:bg-neutral-700 text-rose-400 font-semibold text-lg">
+        C
+      </button>
+      <button type="button" data-key="Backspace" onclick="backspace()" class="key-btn h-14 rounded-2xl bg-neutral-700/80 hover:bg-neutral-700 text-neutral-200 font-medium text-lg">
+        ⌫
+      </button>
+      <button type="button" data-key="%" onclick="inputPercent()" class="key-btn h-14 rounded-2xl bg-neutral-700/80 hover:bg-neutral-700 text-neutral-200 font-medium text-lg">
+        %
+      </button>
+      <button type="button" data-key="/" onclick="inputOperator('/')" class="key-btn h-14 rounded-2xl bg-amber-600/90 hover:bg-amber-500 text-white font-semibold text-2xl">
+        ÷
+      </button>
+
+      <!-- Row 2: 7, 8, 9, × -->
+      <button type="button" data-key="7" onclick="inputDigit('7')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
+        7
+      </button>
+      <button type="button" data-key="8" onclick="inputDigit('8')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
+        8
+      </button>
+      <button type="button" data-key="9" onclick="inputDigit('9')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
+        9
+      </button>
+      <button type="button" data-key="*" onclick="inputOperator('*')" class="key-btn h-14 rounded-2xl bg-amber-600/90 hover:bg-amber-500 text-white font-semibold text-2xl">
+        ×
+      </button>
+
+      <!-- Row 3: 4, 5, 6, − -->
+      <button type="button" data-key="4" onclick="inputDigit('4')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
+        4
+      </button>
+      <button type="button" data-key="5" onclick="inputDigit('5')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
+        5
+      </button>
+      <button type="button" data-key="6" onclick="inputDigit('6')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
+        6
+      </button>
+      <button type="button" data-key="-" onclick="inputOperator('-')" class="key-btn h-14 rounded-2xl bg-amber-600/90 hover:bg-amber-500 text-white font-semibold text-2xl">
+        −
+      </button>
+
+      <!-- Row 4: 1, 2, 3, + -->
+      <button type="button" data-key="1" onclick="inputDigit('1')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
+        1
+      </button>
+      <button type="button" data-key="2" onclick="inputDigit('2')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
+        2
+      </button>
+      <button type="button" data-key="3" onclick="inputDigit('3')" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl">
+        3
+      </button>
+      <button type="button" data-key="+" onclick="inputOperator('+')" class="key-btn h-14 rounded-2xl bg-amber-600/90 hover:bg-amber-500 text-white font-semibold text-2xl">
+        +
+      </button>
+
+      <!-- Row 5: 0 (spans 2 columns), ., = -->
+      <button type="button" data-key="0" onclick="inputDigit('0')" class="key-btn col-span-2 h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-medium text-xl text-left pl-7">
+        0
+      </button>
+      <button type="button" data-key="." onclick="inputDecimal()" class="key-btn h-14 rounded-2xl bg-neutral-800 hover:bg-neutral-750 text-neutral-100 font-mono-calc font-bold text-xl">
+        .
+      </button>
+      <button type="button" data-key="Enter" onclick="calculate()" class="key-btn h-14 rounded-2xl bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold text-2xl">
+        =
+      </button>
+    </div>
+
+  </main>
+
+  <script>
+    // Calculator State
+    let expression = '';
+    let justEvaluated = false;
+
+    const mainDisplay = document.getElementById('mainDisplay');
+    const expressionDisplay = document.getElementById('expressionDisplay');
+    const insultDisplay = document.getElementById('insultDisplay');
+    const calculatorEl = document.getElementById('calculator');
+
+    // Roast database categorized by math offense
+    const ROASTS = {
+      ADD_SUB_ZERO: [
+        "Adding or subtracting zero? Truly a groundbreaking waste of electricity.",
+        "It's the exact same number. Zero does nothing. Just like your brain right now.",
+        "Did you seriously need a microchip to verify what '+ 0' does?"
+      ],
+      MULT_DIV_ONE: [
+        "Multiplying or dividing by 1? Congratulations, it's the exact same number.",
+        "Did you just want to see your own number repeated back to you?",
+        "A potted plant knows that multiplying by 1 changes nothing."
+      ],
+      MULT_ZERO: [
+        "Anything times zero is zero. They taught this on day one of elementary school.",
+        "Zero. Always zero. Just like the effort you put into thinking.",
+        "Why type a number at all if you're just going to multiply it by zero?"
+      ],
+      BASE_TEN: [
+        "You used a calculator instead of just moving the decimal point? Lazy.",
+        "Just slap a zero on the end next time. We live in a Base-10 world.",
+        "Moving a decimal point one spot was too exhausting for you?"
+      ],
+      ONE_OR_TWO: [
+        "Did you genuinely just check if reality still works, or did you forget what 2+2 is?",
+        "You used silicon transistors for toddler math. Shameful.",
+        "Next time count on your fingers—you only needed two of them."
+      ],
+      SINGLE_ADD_SUB: [
+        "Look down at your hands. You have ten built-in fingers for this.",
+        "Single-digit math? My battery is dying of secondhand embarrassment.",
+        "A second-grader could have done that in their head faster than you typed it."
+      ],
+      SINGLE_MULT: [
+        "Someone clearly slept through 3rd-grade multiplication tables.",
+        "Did you really need a machine for basic single-digit times tables?",
+        "Flashcard failure detected. Memorize your times tables."
+      ],
+      NO_OPERATOR: [
+        "You just typed a number and pressed equals. What plot twist were you expecting?",
+        "Yes, that number equals itself. Riveting discovery.",
+        "That's not even a math problem. You forgot the operator, genius."
+      ],
+      DIV_SELF: [
+        "Any number divided by itself is 1. Every single time.",
+        "Dividing a number by itself? Spoiler alert: it's 1.",
+        "You really needed digital confirmation that a number fits into itself once?"
+      ],
+      DIV_ZERO: [
+        "Dividing by zero? Trying to break the universe won't hide your bad math.",
+        "Undefined. Just like your grasp of basic arithmetic rules.",
+        "You can't divide by zero. Even a toaster knows that."
+      ],
+      HARD_MATH: [
+        "Fine, that one was actually worth using a calculator for.",
+        "Okay, fair enough. Nobody wants to do that in their head.",
+        "Finally, a calculation that doesn't insult my circuitry."
+      ]
+    };
+
+    function pickRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function formatPretty(expr) {
+      if (!expr) return '0';
+      return expr
+        .replace(/\*/g, '×')
+        .replace(/\//g, '÷')
+        .replace(/-/g, '−');
+    }
+
+    function clearInsult() {
+      insultDisplay.classList.replace('opacity-100', 'opacity-0');
+    }
+
+    function showInsult(text, type = 'roast') {
+      insultDisplay.textContent = text;
+      if (type === 'roast') {
+        insultDisplay.className = 'text-xs leading-snug font-medium text-right my-auto py-1 transition-opacity duration-200 opacity-100 text-amber-400';
+        calculatorEl.classList.remove('shake');
+        void calculatorEl.offsetWidth;
+        calculatorEl.classList.add('shake');
+      } else if (type === 'error') {
+        insultDisplay.className = 'text-xs leading-snug font-medium text-right my-auto py-1 transition-opacity duration-200 opacity-100 text-rose-400';
+        calculatorEl.classList.remove('shake');
+        void calculatorEl.offsetWidth;
+        calculatorEl.classList.add('shake');
+      } else if (type === 'respect') {
+        insultDisplay.className = 'text-xs leading-snug font-medium text-right my-auto py-1 transition-opacity duration-200 opacity-100 text-emerald-400';
+      }
+    }
+
+    function updateDisplay() {
+      mainDisplay.textContent = formatPretty(expression || '0');
+    }
+
+    function clearAll() {
+      expression = '';
+      justEvaluated = false;
+      expressionDisplay.textContent = '';
+      clearInsult();
+      updateDisplay();
+    }
+
+    function backspace() {
+      if (justEvaluated) {
+        clearAll();
+        return;
+      }
+      clearInsult();
+      expression = expression.slice(0, -1);
+      updateDisplay();
+    }
+
+    function inputDigit(digit) {
+      if (justEvaluated) {
+        expression = digit;
+        justEvaluated = false;
+        expressionDisplay.textContent = '';
+      } else {
+        if (expression === '0') {
+          expression = digit;
+        } else {
+          expression += digit;
+        }
+      }
+      clearInsult();
+      updateDisplay();
+    }
+
+    function inputDecimal() {
+      if (justEvaluated) {
+        expression = '0.';
+        justEvaluated = false;
+        expressionDisplay.textContent = '';
+        clearInsult();
+        updateDisplay();
+        return;
+      }
+
+      // Check the last number segment so we don't allow two decimals in one number
+      const parts = expression.split(/[+\-*/]/);
+      const currentPart = parts[parts.length - 1];
+      if (currentPart.includes('.')) return;
+
+      if (expression === '' || /[+\-*/]$/.test(expression)) {
+        expression += '0.';
+      } else {
+        expression += '.';
+      }
+      clearInsult();
+      updateDisplay();
+    }
+
+    function inputOperator(op) {
+      if (expression === '' && op === '-') {
+        expression = '-';
+        clearInsult();
+        updateDisplay();
+        return;
+      }
+      if (expression === '' || expression === '-') return;
+
+      justEvaluated = false;
+      clearInsult();
+
+      // Replace trailing operator if user changes mind
+      if (/[+\-*/]$/.test(expression)) {
+        expression = expression.slice(0, -1) + op;
+      } else {
+        expression += op;
+      }
+      updateDisplay();
+    }
+
+    function inputPercent() {
+      if (!expression || /[+\-*/]$/.test(expression)) return;
+      try {
+        const val = evaluateRaw(expression);
+        if (Number.isFinite(val)) {
+          expression = String(parseFloat((val / 100).toPrecision(12)));
+          justEvaluated = false;
+          clearInsult();
+          updateDisplay();
+        }
+      } catch {
+        // Ignore invalid percent state
+      }
+    }
+
+    function evaluateRaw(exprStr) {
+      if (/[^0-9+\-*/.]/.test(exprStr)) throw new Error('Invalid');
+      const fn = new Function(`"use strict"; return (${exprStr});`);
+      const res = fn();
+      if (typeof res === 'number' && Number.isFinite(res)) {
+        return parseFloat(res.toPrecision(12));
+      }
+      return res;
+    }
+
+    function analyzeCalculation(rawExpr, result) {
+      // 1. Check division by zero
+      if (!Number.isFinite(result) || /\/0(\.0+)?(?![0-9])/.test(rawExpr)) {
+        return { message: pickRandom(ROASTS.DIV_ZERO), type: 'error' };
+      }
+
+      // 2. Single number with no operator
+      if (/^[+-]?\d+(\.\d+)?$/.test(rawExpr)) {
+        return { message: pickRandom(ROASTS.NO_OPERATOR), type: 'roast' };
+      }
+
+      // 3. Binary expression check: A op B
+      const match = rawExpr.match(/^([+-]?\d+(?:\.\d+)?)([+\-*/])(\d+(?:\.\d+)?)$/);
+      if (match) {
+        const a = parseFloat(match[1]);
+        const op = match[2];
+        const b = parseFloat(match[3]);
+
+        // 1 + 1 or 2 + 2 or 2 * 2
+        if ((op === '+' && ((a === 1 && b === 1) || (a === 2 && b === 2))) || (op === '*' && a === 2 && b === 2)) {
+          return { message: pickRandom(ROASTS.ONE_OR_TWO), type: 'roast' };
+        }
+
+        // Adding or subtracting 0
+        if ((op === '+' || op === '-') && (a === 0 || b === 0)) {
+          return { message: pickRandom(ROASTS.ADD_SUB_ZERO), type: 'roast' };
+        }
+
+        // Multiplying by 0 (or 0 / x)
+        if ((op === '*' && (a === 0 || b === 0)) || (op === '/' && a === 0)) {
+          return { message: pickRandom(ROASTS.MULT_ZERO), type: 'roast' };
+        }
+
+        // Multiplying or dividing by 1
+        if ((op === '*' && (a === 1 || b === 1)) || (op === '/' && b === 1)) {
+          return { message: pickRandom(ROASTS.MULT_DIV_ONE), type: 'roast' };
+        }
+
+        // Dividing a number by itself
+        if (op === '/' && a === b && a !== 0) {
+          return { message: pickRandom(ROASTS.DIV_SELF), type: 'roast' };
+        }
+
+        // Multiplying or dividing by 10, 100, 1000
+        if ((op === '*' || op === '/') && ([10, 100, 1000].includes(b) || (op === '*' && [10, 100, 1000].includes(Math.abs(a))))) {
+          return { message: pickRandom(ROASTS.BASE_TEN), type: 'roast' };
+        }
+
+        // Single-digit addition or subtraction
+        if ((op === '+' || op === '-') && Number.isInteger(a) && Number.isInteger(b) && Math.abs(a) < 10 && Math.abs(b) < 10) {
+          return { message: pickRandom(ROASTS.SINGLE_ADD_SUB), type: 'roast' };
+        }
+
+        // Basic single-digit multiplication tables (or simple exact division)
+        if (
+          (op === '*' && Number.isInteger(a) && Number.isInteger(b) && Math.abs(a) <= 10 && Math.abs(b) <= 10) ||
+          (op === '/' && Number.isInteger(a) && Number.isInteger(b) && Number.isInteger(result) && Math.abs(b) <= 10 && Math.abs(result) <= 10)
+        ) {
+          return { message: pickRandom(ROASTS.SINGLE_MULT), type: 'roast' };
+        }
+      }
+
+      // 4. Check if it's genuinely hard math (multi-digit multiplication/division, decimals, or chained ops)
+      const opCount = (rawExpr.slice(1).match(/[+\-*/]/g) || []).length;
+      const hasDecimals = /\d+\.\d+/.test(rawExpr);
+      const hasLargeNums = /\d{3,}/.test(rawExpr);
+      const isHardMultDiv = /[*/]/.test(rawExpr) && (/\d{2,}/.test(rawExpr) || hasDecimals);
+
+      if (opCount >= 2 || hasLargeNums || isHardMultDiv) {
+        return { message: pickRandom(ROASTS.HARD_MATH), type: 'respect' };
+      }
+
+      return null;
+    }
+
+    function calculate() {
+      if (!expression) return;
+
+      // Strip trailing operator if user pressed '=' right after an operator
+      const cleanExpr = expression.replace(/[+\-*/]+$/, '');
+      if (!cleanExpr) return;
+
+      try {
+        const result = evaluateRaw(cleanExpr);
+        const feedback = analyzeCalculation(cleanExpr, result);
+
+        expressionDisplay.textContent = `${formatPretty(cleanExpr)} =`;
+
+        if (!Number.isFinite(result)) {
+          mainDisplay.textContent = 'Error';
+          expression = '';
+        } else {
+          expression = String(result);
+          mainDisplay.textContent = formatPretty(expression);
+        }
+
+        justEvaluated = true;
+
+        if (feedback) {
+          showInsult(feedback.message, feedback.type);
+        } else {
+          clearInsult();
+        }
+      } catch {
+        mainDisplay.textContent = 'Error';
+        expression = '';
+        justEvaluated = true;
+      }
+    }
+
+    // Full Keyboard Support
+    window.addEventListener('keydown', (e) => {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+
+      const key = e.key;
+
+      // Visual button press feedback
+      let selectorKey = key;
+      if (key === '=' || key === 'Enter') selectorKey = 'Enter';
+      if (key === 'c' || key === 'C' || key === 'Escape') selectorKey = 'Escape';
+
+      const btn = document.querySelector(`button[data-key="${CSS.escape(selectorKey)}"]`);
+      if (btn) {
+        btn.classList.add('pressed');
+        setTimeout(() => btn.classList.remove('pressed'), 100);
+      }
+
+      if (/^[0-9]$/.test(key)) {
+        e.preventDefault();
+        inputDigit(key);
+      } else if (key === '.') {
+        e.preventDefault();
+        inputDecimal();
+      } else if (['+', '-', '*', '/'].includes(key)) {
+        e.preventDefault();
+        inputOperator(key);
+      } else if (key === '%') {
+        e.preventDefault();
+        inputPercent();
+      } else if (key === 'Enter' || key === '=') {
+        e.preventDefault();
+        calculate();
+      } else if (key === 'Backspace') {
+        e.preventDefault();
+        backspace();
+      } else if (key === 'Escape' || key === 'c' || key === 'C') {
+        e.preventDefault();
+        clearAll();
+      }
+    });
+  </script>
+</body>
+</html>
